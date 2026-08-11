@@ -87,8 +87,53 @@ async function login(){
  $("loginView").classList.add("hidden");$("adminView").classList.remove("hidden");$("adminEmail").textContent="Prijavljen: "+r.data.user.email;loadMatches()
 }
 async function logout(){await sb.auth.signOut();publicMode()}
-async function loadPublic(){
- const id=matchId();
+function matchId(){
+    return new URLSearchParams(location.search).get("match");
+}
+
+async function findActiveMatch(){
+
+    const direct=matchId();
+
+    // Ako je otvoren link ?match=neki-id
+    if(direct) return direct;
+
+    const {data,error}=await sb
+        .from("matches")
+        .select("id,voting_opens_at,voting_closes_at,match_date")
+        .eq("status","published")
+        .order("match_date",{ascending:false});
+
+    if(error || !data || data.length===0)
+        return null;
+
+    const now=Date.now();
+
+    // Trenutno otvoreno glasanje
+    const active=data.find(m=>{
+        const open=new Date(m.voting_opens_at).getTime();
+        const close=new Date(m.voting_closes_at).getTime();
+
+        return now>=open && now<close;
+    });
+
+    if(active)
+        return active.id;
+
+    // Ako trenutno nema glasanja,
+    // pronađi sljedeće
+    const next=data
+        .filter(m =>
+            new Date(m.voting_opens_at).getTime()>now
+        )
+        .sort((a,b)=>
+            new Date(a.voting_opens_at)-new Date(b.voting_opens_at)
+        )[0];
+
+    return next ? next.id : null;
+}
+ async function loadPublic(){
+ const id=await findActiveMatch();
  if(!id){$("matchTitle").textContent="Igrač utakmice";$("matchInfo").textContent="QR kod utakmice otvorit će glasanje.";$("players").innerHTML="";return}
  const r=await sb.from("matches").select("*").eq("id",id).eq("status","published").maybeSingle();
  if(r.error||!r.data){$("matchTitle").textContent="Utakmica nije pronađena";$("matchInfo").textContent="Provjeri poveznicu.";$("players").innerHTML="";return}
