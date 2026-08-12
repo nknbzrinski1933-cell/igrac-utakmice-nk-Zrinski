@@ -10,340 +10,340 @@
 
 <style>
 :root{
-    --red:#e30613;
-    --blue:#1238e8;
-    --dark:#070a12;
-    --card:#111827;
-    --line:#273247;
-    --muted:#aab4c5;
-    --white:#ffffff;
+--red:#e30613;
+--blue:#1238e8;
+--dark:#070a12;
+--card:#111827;
+--line:#273247;
+--muted:#aab4c5;
+--white:#ffffff;
 }
 
 *{
-    box-sizing:border-box;
+box-sizing:border-box;
 }
 
 body{
-    margin:0;
-    min-height:100vh;
-    font-family:Arial,Helvetica,sans-serif;
-    background:
-        radial-gradient(circle at top right,#142b8a55,transparent 35%),
-        linear-gradient(145deg,#05070d,#111827);
-    color:var(--white);
+margin:0;
+min-height:100vh;
+font-family:Arial,Helvetica,sans-serif;
+background:
+radial-gradient(circle at top right,#142b8a55,transparent 35%),
+linear-gradient(145deg,#05070d,#111827);
+color:var(--white);
 }
 
 button,
 input,
 select{
-    font:inherit;
+font:inherit;
 }
 
 button{
-    border:0;
-    border-radius:11px;
-    padding:12px 16px;
-    font-weight:800;
-    cursor:pointer;
-    color:white;
-    background:var(--red);
+border:0;
+border-radius:11px;
+padding:12px 16px;
+font-weight:800;
+cursor:pointer;
+color:white;
+background:var(--red);
 }
 
 button:hover{
-    filter:brightness(1.08);
+filter:brightness(1.08);
 }
 
 button:disabled{
-    opacity:.45;
-    cursor:not-allowed;
+opacity:.45;
+cursor:not-allowed;
 }
 
 .container{
-    width:100%;
-    max-width:760px;
-    margin:auto;
-    padding:20px 15px 50px;
+width:100%;
+max-width:760px;
+margin:auto;
+padding:20px 15px 50px;
 }
 
 /* HEADER */
 
 .header{
-    text-align:center;
-    padding:10px 0 5px;
+text-align:center;
+padding:10px 0 5px;
 }
 
 .logo{
-    width:105px;
-    height:105px;
-    object-fit:contain;
-    background:white;
-    border-radius:24px;
-    padding:5px;
-    box-shadow:0 0 35px #1238e855;
+width:105px;
+height:105px;
+object-fit:contain;
+background:white;
+border-radius:24px;
+padding:5px;
+box-shadow:0 0 35px #1238e855;
 }
 
 .header h1{
-    margin:12px 0 3px;
-    font-size:30px;
+margin:12px 0 3px;
+font-size:30px;
 }
 
 .header-sub{
-    color:var(--muted);
-    font-size:14px;
+color:var(--muted);
+font-size:14px;
 }
 
 .nav{
-    display:flex;
-    justify-content:center;
-    gap:8px;
-    margin-top:14px;
+display:flex;
+justify-content:center;
+gap:8px;
+margin-top:14px;
 }
 
 .nav button{
-    background:#202a3d;
+background:#202a3d;
 }
 
 .nav button.active{
-    background:var(--blue);
+background:var(--blue);
 }
 
 /* CARDS */
 
 .card{
-    background:rgba(17,24,39,.96);
-    border:1px solid var(--line);
-    border-radius:20px;
-    padding:20px;
-    margin-top:16px;
-    box-shadow:0 15px 40px #0006;
+background:rgba(17,24,39,.96);
+border:1px solid var(--line);
+border-radius:20px;
+padding:20px;
+margin-top:16px;
+box-shadow:0 15px 40px #0006;
 }
 
 .card h2{
-    margin-top:0;
+margin-top:0;
 }
 
 /* MATCH */
 
 .match-title{
-    font-size:28px;
-    font-weight:900;
-    text-align:center;
+font-size:28px;
+font-weight:900;
+text-align:center;
 }
 
 .match-info{
-    text-align:center;
-    color:var(--muted);
-    margin-top:6px;
+text-align:center;
+color:var(--muted);
+margin-top:6px;
 }
 
 /* STATUS */
 
 .status{
-    text-align:center;
-    font-weight:900;
-    padding:12px;
-    border-radius:12px;
-    margin-top:18px;
+text-align:center;
+font-weight:900;
+padding:12px;
+border-radius:12px;
+margin-top:18px;
 }
 
 .status.open{
-    background:#087a3d;
+background:#087a3d;
 }
 
 .status.wait{
-    background:#705900;
+background:#705900;
 }
 
 .status.closed{
-    background:#7a2029;
+background:#7a2029;
 }
 
 /* TIMER */
 
 .timer{
-    text-align:center;
-    margin:20px 0;
+text-align:center;
+margin:20px 0;
 }
 
 .timer-label{
-    color:var(--muted);
-    font-size:12px;
-    text-transform:uppercase;
-    letter-spacing:1.5px;
+color:var(--muted);
+font-size:12px;
+text-transform:uppercase;
+letter-spacing:1.5px;
 }
 
 .timer-value{
-    font-size:42px;
-    font-weight:900;
-    margin-top:5px;
-    letter-spacing:2px;
+font-size:42px;
+font-weight:900;
+margin-top:5px;
+letter-spacing:2px;
 }
 
 /* NOTICE */
 
 .notice{
-    padding:12px;
-    border-radius:10px;
-    background:#182132;
-    color:#d9e0ec;
-    margin-top:10px;
+padding:12px;
+border-radius:10px;
+background:#182132;
+color:#d9e0ec;
+margin-top:10px;
 }
 
 /* PLAYERS */
 
 .player{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:15px;
-    padding:15px;
-    margin:10px 0;
-    border:1px solid var(--line);
-    border-radius:15px;
-    background:#0b111d;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:15px;
+padding:15px;
+margin:10px 0;
+border:1px solid var(--line);
+border-radius:15px;
+background:#0b111d;
 }
 
 .player-name{
-    font-size:18px;
-    font-weight:800;
+font-size:18px;
+font-weight:800;
 }
 
 .player-number{
-    color:var(--muted);
-    font-size:12px;
-    margin-bottom:4px;
+color:var(--muted);
+font-size:12px;
+margin-bottom:4px;
 }
 
 .player button{
-    min-width:100px;
+min-width:100px;
 }
 
 /* RESULTS */
 
 .result-row{
-    padding:12px 0;
-    border-bottom:1px solid var(--line);
+padding:12px 0;
+border-bottom:1px solid var(--line);
 }
 
 .bar{
-    height:8px;
-    background:#283246;
-    border-radius:9px;
-    overflow:hidden;
-    margin-top:7px;
+height:8px;
+background:#283246;
+border-radius:9px;
+overflow:hidden;
+margin-top:7px;
 }
 
 .fill{
-    height:100%;
-    background:linear-gradient(90deg,var(--red),var(--blue));
+height:100%;
+background:linear-gradient(90deg,var(--red),var(--blue));
 }
 
 /* FORMS */
 
 label{
-    display:block;
-    color:var(--muted);
-    font-size:13px;
-    margin-top:5px;
+display:block;
+color:var(--muted);
+font-size:13px;
+margin-top:5px;
 }
 
 input,
 select{
-    width:100%;
-    padding:12px;
-    margin:6px 0 12px;
-    border-radius:10px;
-    border:1px solid var(--line);
-    background:#090e18;
-    color:white;
+width:100%;
+padding:12px;
+margin:6px 0 12px;
+border-radius:10px;
+border:1px solid var(--line);
+background:#090e18;
+color:white;
 }
 
 input:focus,
 select:focus{
-    outline:2px solid #1238e866;
+outline:2px solid #1238e866;
 }
 
 .grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
 }
 
 /* ADMIN */
 
 .admin-match{
-    padding:13px 0;
-    border-bottom:1px solid var(--line);
+padding:13px 0;
+border-bottom:1px solid var(--line);
 }
 
 .admin-match:last-child{
-    border-bottom:0;
+border-bottom:0;
 }
 
 .admin-actions{
-    margin-top:9px;
+margin-top:9px;
 }
 
 /* HELPERS */
 
 .hidden{
-    display:none !important;
+display:none !important;
 }
 
 .small{
-    color:var(--muted);
-    font-size:12px;
+color:var(--muted);
+font-size:12px;
 }
 
 .red-button{
-    background:#9e0710;
+background:#9e0710;
 }
 
 .blue-button{
-    background:var(--blue);
+background:var(--blue);
 }
 
 .gray-button{
-    background:#273247;
+background:#273247;
 }
 
 /* MOBILE */
 
 @media(max-width:520px){
 
-    .container{
-        padding:15px 12px 40px;
-    }
+.container{
+padding:15px 12px 40px;
+}
 
-    .logo{
-        width:90px;
-        height:90px;
-    }
+.logo{
+width:90px;
+height:90px;
+}
 
-    .header h1{
-        font-size:25px;
-    }
+.header h1{
+font-size:25px;
+}
 
-    .match-title{
-        font-size:23px;
-    }
+.match-title{
+font-size:23px;
+}
 
-    .timer-value{
-        font-size:32px;
-    }
+.timer-value{
+font-size:32px;
+}
 
-    .grid{
-        grid-template-columns:1fr;
-    }
+.grid{
+grid-template-columns:1fr;
+}
 
-    .player{
-        flex-direction:column;
-        align-items:stretch;
-    }
+.player{
+flex-direction:column;
+align-items:stretch;
+}
 
-    .player button{
-        width:100%;
-    }
+.player button{
+width:100%;
+}
 }
 </style>
 </head>
@@ -354,35 +354,35 @@ select:focus{
 
 <header class="header">
 
-    <img
-        src="logo.png"
-        class="logo"
-        alt="NK Zrinski logo"
-        onerror="this.style.display='none'"
-    >
+<img
+src="logo.png"
+class="logo"
+alt="NK Zrinski logo"
+onerror="this.style.display='none'"
+>
 
-    <h1>IGRAČ UTAKMICE</h1>
+<h1>IGRAČ UTAKMICE</h1>
 
-    <div class="header-sub">
-        NK Zrinski Nova Bukovica
-    </div>
+<div class="header-sub">
+NK Zrinski Nova Bukovica
+</div>
 
-    <div class="nav">
+<div class="nav">
 
-        <button
-            id="publicBtn"
-            class="active"
-        >
-            GLASANJE
-        </button>
+<button
+id="publicBtn"
+class="active"
+>
+GLASANJE
+</button>
 
-        <button
-            id="adminBtn"
-        >
-            ADMIN
-        </button>
+<button
+id="adminBtn"
+>
+ADMIN
+</button>
 
-    </div>
+</div>
 
 </header>
 
@@ -395,69 +395,69 @@ select:focus{
 
 <div class="card">
 
-    <div
-        id="matchTitle"
-        class="match-title"
-    >
-        Učitavanje utakmice...
-    </div>
+<div
+id="matchTitle"
+class="match-title"
+>
+Učitavanje utakmice...
+</div>
 
-    <div
-        id="matchInfo"
-        class="match-info"
-    >
-        Učitavanje...
-    </div>
-
-
-    <div
-        id="voteStatus"
-        class="status wait"
-    >
-        UČITAVANJE
-    </div>
+<div
+id="matchInfo"
+class="match-info"
+>
+Učitavanje...
+</div>
 
 
-    <!-- TIMER -->
-
-    <div class="timer">
-
-        <div
-            id="timerLabel"
-            class="timer-label"
-        >
-            Vrijeme
-        </div>
-
-        <div
-            id="timer"
-            class="timer-value"
-        >
-            --:--:--
-        </div>
-
-    </div>
+<div
+id="voteStatus"
+class="status wait"
+>
+UČITAVANJE
+</div>
 
 
-    <div
-        id="voteMessage"
-        class="notice"
-    >
-        Učitavanje...
-    </div>
+<!-- TIMER -->
+
+<div class="timer">
+
+<div
+id="timerLabel"
+class="timer-label"
+>
+Vrijeme
+</div>
+
+<div
+id="timer"
+class="timer-value"
+>
+--:--:--
+</div>
+
+</div>
 
 
-    <!-- PLAYERS -->
+<div
+id="voteMessage"
+class="notice"
+>
+Učitavanje...
+</div>
 
-    <div id="players"></div>
+
+<!-- PLAYERS -->
+
+<div id="players"></div>
 
 
-    <!-- RESULTS -->
+<!-- RESULTS -->
 
-    <div
-        id="results"
-        class="hidden"
-    ></div>
+<div
+id="results"
+class="hidden"
+></div>
 
 </div>
 
@@ -469,39 +469,38 @@ select:focus{
 <!-- ========================= -->
 
 <section
-    id="loginView"
-    class="card hidden"
+id="loginView"
+class="card hidden"
+
+<h2>Admin prijava</h2>
+
+<label>Email</label>
+
+<input
+id="email"
+type="email"
+placeholder="Admin email"
 >
 
-    <h2>Admin prijava</h2>
 
-    <label>Email</label>
+<label>Lozinka</label>
 
-    <input
-        id="email"
-        type="email"
-        placeholder="Admin email"
-    >
-
-
-    <label>Lozinka</label>
-
-    <input
-        id="password"
-        type="password"
-        placeholder="Lozinka"
-    >
+<input
+id="password"
+type="password"
+placeholder="Lozinka"
+>
 
 
-    <button id="loginBtn">
-        PRIJAVI SE
-    </button>
+<button id="loginBtn">
+PRIJAVI SE
+</button>
 
 
-    <div
-        id="loginMessage"
-        class="notice"
-    ></div>
+<div
+id="loginMessage"
+class="notice"
+></div>
 
 </section>
 
@@ -511,123 +510,122 @@ select:focus{
 <!-- ========================= -->
 
 <section
-    id="adminView"
-    class="hidden"
->
+id="adminView"
+class="hidden"
 
 
 <!-- NOVA UTAKMICA -->
 
 <div class="card">
 
-    <h2>Nova utakmica</h2>
+<h2>Nova utakmica</h2>
 
 
-    <div class="grid">
+<div class="grid">
 
-        <div>
+<div>
 
-            <label>Domaći</label>
+<label>Domaći</label>
 
-            <input
-                id="homeTeam"
-                value="NK Zrinski"
-            >
+<input
+id="homeTeam"
+value="NK Zrinski"
+>
 
-        </div>
-
-
-        <div>
-
-            <label>Gosti</label>
-
-            <input
-                id="awayTeam"
-                placeholder="Protivnik"
-            >
-
-        </div>
-
-    </div>
+</div>
 
 
-    <label>Datum utakmice</label>
+<div>
 
-    <input
-        id="matchDate"
-        type="date"
-    >
+<label>Gosti</label>
 
+<input
+id="awayTeam"
+placeholder="Protivnik"
+>
 
-    <div class="grid">
+</div>
 
-        <div>
-
-            <label>Otvaranje glasanja</label>
-
-            <input
-                id="openTime"
-                type="datetime-local"
-            >
-
-        </div>
+</div>
 
 
-        <div>
+<label>Datum utakmice</label>
 
-            <label>Zatvaranje glasanja</label>
-
-            <input
-                id="closeTime"
-                type="datetime-local"
-            >
-
-        </div>
-
-    </div>
+<input
+id="matchDate"
+type="date"
+>
 
 
-    <label>Status</label>
+<div class="grid">
 
-    <select id="matchStatus">
+<div>
 
-        <option value="published">
-            Objavljeno
-        </option>
+<label>Otvaranje glasanja</label>
 
-        <option value="draft">
-            Nacrt
-        </option>
+<input
+id="openTime"
+type="datetime-local"
+>
 
-    </select>
-
-
-    <label>
-
-        <input
-            id="resultsAfter"
-            type="checkbox"
-        >
-
-        Prikaži rezultate nakon zatvaranja
-
-    </label>
+</div>
 
 
-    <br>
+<div>
+
+<label>Zatvaranje glasanja</label>
+
+<input
+id="closeTime"
+type="datetime-local"
+>
+
+</div>
+
+</div>
 
 
-    <button
-        id="saveMatchBtn"
-    >
-        SPREMI UTAKMICU
-    </button>
+<label>Status</label>
+
+<select id="matchStatus">
+
+<option value="published">
+Objavljeno
+</option>
+
+<option value="draft">
+Nacrt
+</option>
+
+</select>
 
 
-    <div
-        id="adminMessage"
-        class="notice"
-    ></div>
+<label>
+
+<input
+id="resultsAfter"
+type="checkbox"
+>
+
+Prikaži rezultate nakon zatvaranja
+
+</label>
+
+
+<br>
+
+
+<button
+id="saveMatchBtn"
+>
+SPREMI UTAKMICU
+</button>
+
+
+<div
+id="adminMessage"
+class="notice"
+></div>
 
 </div>
 
@@ -636,11 +634,11 @@ select:focus{
 
 <div class="card">
 
-    <h2>Utakmice</h2>
+<h2>Utakmice</h2>
 
-    <div id="matchList">
-        Učitavanje...
-    </div>
+<div id="matchList">
+Učitavanje...
+</div>
 
 </div>
 
@@ -648,66 +646,65 @@ select:focus{
 <!-- UPRAVLJANJE IGRAČIMA -->
 
 <div
-    id="manageView"
-    class="card hidden"
+id="manageView"
+class="card hidden"
+
+<h2>Upravljanje igračima</h2>
+
+<div
+id="selectedMatch"
+class="small"
+></div>
+
+
+<div class="grid">
+
+<div>
+
+<label>Ime igrača</label>
+
+<input
+id="playerName"
+placeholder="Ime i prezime"
 >
 
-    <h2>Upravljanje igračima</h2>
-
-    <div
-        id="selectedMatch"
-        class="small"
-    ></div>
+</div>
 
 
-    <div class="grid">
+<div>
 
-        <div>
+<label>Broj dresa</label>
 
-            <label>Ime igrača</label>
+<input
+id="playerNumber"
+type="number"
+placeholder="Broj"
+>
 
-            <input
-                id="playerName"
-                placeholder="Ime i prezime"
-            >
+</div>
 
-        </div>
-
-
-        <div>
-
-            <label>Broj dresa</label>
-
-            <input
-                id="playerNumber"
-                type="number"
-                placeholder="Broj"
-            >
-
-        </div>
-
-    </div>
+</div>
 
 
-    <button
-        id="addPlayerBtn"
-    >
-        DODAJ IGRAČA
-    </button>
+<button
+id="addPlayerBtn"
+>
+DODAJ IGRAČA
+</button>
 
 
-    <div id="playerList"></div>
+<div id="playerList"></div>
 
 
-    <br>
+<br>
 
 
-    <button
-        id="logoutBtn"
-        class="gray-button"
-    >
-        ODJAVA
-    </button>
+<button
+id="logoutBtn"
+class="gray-button"
+>
+ODJAVA
+</button>
 
 </div>
 
@@ -719,7 +716,7 @@ select:focus{
 <script>
 
 /* =====================================================
-   SUPABASE
+SUPABASE
 ===================================================== */
 
 const SUPABASE_URL =
@@ -730,13 +727,13 @@ const SUPABASE_KEY =
 
 const sb =
 supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
+SUPABASE_URL,
+SUPABASE_KEY
 );
 
 
 /* =====================================================
-   GLOBALNE VARIJABLE
+GLOBALNE VARIJABLE
 ===================================================== */
 
 let selectedMatch = null;
@@ -745,1621 +742,1613 @@ let timerInterval = null;
 
 
 /* =====================================================
-   POMOĆNE FUNKCIJE
+POMOĆNE FUNKCIJE
 ===================================================== */
 
-function $(id){
+function $`(id){
 
-    return document.getElementById(id);
+return document.getElementById(id);
 
 }
 
 
 function esc(value){
 
-    return String(value ?? "")
-        .replace(/[&<>"']/g, function(char){
+return String(value ?? "")
+.replace(/[&<>"']/g, function(char){
 
-            return {
-                "&":"&amp;",
-                "<":"&lt;",
-                ">":"&gt;",
-                '"':"&quot;",
-                "'":"&#039;"
+return {
+"&":"&",
+"<":"<",
+">":">",
+'"':""",
+"'":"'"
 
-            }[char];
+}[char];
 
-        });
+});
 
 }
 
 
 /* =====================================================
-   ID UTAKMICE IZ LINKA
+ID UTAKMICE IZ LINKA
 ===================================================== */
 
 function matchId(){
 
-    return new URLSearchParams(
-        window.location.search
-    ).get("match");
+return new URLSearchParams(
+window.location.search
+).get("match");
 
 }
 
 
 /* =====================================================
-   IDENTIFIKACIJA UREĐAJA
+IDENTIFIKACIJA UREĐAJA
 ===================================================== */
 
 function deviceToken(){
 
-    let token =
-        localStorage.getItem(
-            "zrinski_device_token"
-        );
+let token =
+localStorage.getItem(
+"zrinski_device_token"
+);
 
 
-    if(!token){
+if(!token){
 
-        if(
-            window.crypto &&
-            crypto.randomUUID
-        ){
+if(
+window.crypto &&
+crypto.randomUUID
+){
 
-            token =
-                crypto.randomUUID();
+token =
+crypto.randomUUID();
 
-        }else{
+}else{
 
-            token =
-                Math.random()
-                .toString(36)
-                .substring(2)
-                +
-                Date.now();
+token =
+Math.random()
+.toString(36)
+.substring(2)
++
+Date.now();
 
-        }
-
-
-        localStorage.setItem(
-            "zrinski_device_token",
-            token
-        );
-
-    }
+}
 
 
-    return token;
+localStorage.setItem(
+"zrinski_device_token",
+token
+);
+
+}
+
+
+return token;
 
 }
 
 
 /* =====================================================
-   PRONAĐI AKTIVNU UTAKMICU
+PRONAĐI AKTIVNU UTAKMICU
 ===================================================== */
 
 async function findActiveMatch(){
 
-    /*
-        Ako link ima:
+/*
+Ako link ima:
 
-        ?match=ID
+?match=ID
 
-        koristi baš tu utakmicu.
-    */
+koristi baš tu utakmicu.
+*/
 
-    const direct =
-        matchId();
-
-
-    if(direct){
-
-        return direct;
-
-    }
+const direct =
+matchId();
 
 
-    /*
-        Ako nema ?match=ID,
-        tražimo objavljene utakmice.
-    */
+if(direct){
 
-    const result =
-        await sb
-        .from("matches")
-        .select(
-            "id,voting_opens_at,voting_closes_at,match_date"
-        )
-        .eq(
-            "status",
-            "published"
-        )
-        .order(
-            "match_date",
-            {
-                ascending:false
-            }
-        );
+return direct;
+
+}
 
 
-    if(
-        result.error ||
-        !result.data ||
-        result.data.length === 0
-    ){
+/*
+Ako nema ?match=ID,
+tražimo objavljene utakmice.
+*/
 
-        return null;
-
-    }
-
-
-    const now =
-        Date.now();
-
-
-    /*
-        Prvo tražimo trenutno
-        otvoreno glasanje.
-    */
-
-    const active =
-        result.data.find(function(match){
-
-            const open =
-                new Date(
-                    match.voting_opens_at
-                ).getTime();
+const result =
+await sb
+.from("matches")
+.select(
+"id,voting_opens_at,voting_closes_at,match_date"
+)
+.eq(
+"status",
+"published"
+)
+.order(
+"match_date",
+{
+ascending:false
+}
+);
 
 
-            const close =
-                new Date(
-                    match.voting_closes_at
-                ).getTime();
+if(
+result.error ||
+!result.data ||
+result.data.length === 0
+){
+
+return null;
+
+}
 
 
-            return (
-                now >= open &&
-                now < close
-            );
-
-        });
+const now =
+Date.now();
 
 
-    if(active){
+/*
+Prvo tražimo trenutno
+otvoreno glasanje.
+*/
 
-        return active.id;
+const active =
+result.data.find(function(match){
 
-    }
-
-
-    /*
-        Ako nema aktivnog,
-        pronađi sljedeće glasanje.
-    */
-
-    const next =
-        result.data
-        .filter(function(match){
-
-            return (
-                new Date(
-                    match.voting_opens_at
-                ).getTime()
-                > now
-            );
-
-        })
-        .sort(function(a,b){
-
-            return (
-                new Date(a.voting_opens_at)
-                -
-                new Date(b.voting_opens_at)
-            );
-
-        })[0];
+const open =
+new Date(
+match.voting_opens_at
+).getTime();
 
 
-    return next
-        ? next.id
-        : null;
+const close =
+new Date(
+match.voting_closes_at
+).getTime();
+
+
+return (
+now >= open &&
+now < close
+);
+
+});
+
+
+if(active){
+
+return active.id;
+
+}
+
+
+/*
+Ako nema aktivnog,
+pronađi sljedeće glasanje.
+*/
+
+const next =
+result.data
+.filter(function(match){
+
+return (
+new Date(
+match.voting_opens_at
+).getTime()
+> now
+);
+
+})
+.sort(function(a,b){
+
+return (
+new Date(a.voting_opens_at)
+-
+new Date(b.voting_opens_at)
+);
+
+})[0];
+
+
+return next
+? next.id
+: null;
 
 }
 
 
 /* =====================================================
-   FORMAT TIMERA
+FORMAT TIMERA
 ===================================================== */
 
 function formatTime(milliseconds){
 
-    let seconds =
-        Math.max(
-            0,
-            Math.floor(
-                milliseconds / 1000
-            )
-        );
+let seconds =
+Math.max(
+0,
+Math.floor(
+milliseconds / 1000
+)
+);
 
 
-    const hours =
-        Math.floor(
-            seconds / 3600
-        );
+const hours =
+Math.floor(
+seconds / 3600
+);
 
 
-    seconds %= 3600;
+seconds %= 3600;
 
 
-    const minutes =
-        Math.floor(
-            seconds / 60
-        );
+const minutes =
+Math.floor(
+seconds / 60
+);
 
 
-    seconds %= 60;
+seconds %= 60;
 
 
-    return (
-        String(hours).padStart(2,"0")
-        +
-        ":"
-        +
-        String(minutes).padStart(2,"0")
-        +
-        ":"
-        +
-        String(seconds).padStart(2,"0")
-    );
+return (
+String(hours).padStart(2,"0")
++
+":"
++
+String(minutes).padStart(2,"0")
++
+":"
++
+String(seconds).padStart(2,"0")
+);
 
 }
 
 
 /* =====================================================
-   TIMER
+TIMER
 ===================================================== */
 
 function startTimer(
-    openTime,
-    closeTime,
-    state
+openTime,
+closeTime,
+state
 ){
 
-    clearInterval(
-        timerInterval
-    );
+clearInterval(
+timerInterval
+);
 
 
-    function update(){
+function update(){
 
-        const now =
-            Date.now();
-
-
-        let remaining;
+const now =
+Date.now();
 
 
-        if(state === "wait"){
-
-            remaining =
-                openTime - now;
+let remaining;
 
 
-            $("timerLabel").textContent =
-                "GLASANJE SE OTVARA ZA";
+if(state === "wait"){
 
-        }else{
-
-            remaining =
-                closeTime - now;
+remaining =
+openTime - now;
 
 
-            $("timerLabel").textContent =
-                "GLASANJE SE ZATVARA ZA";
+`$("timerLabel").textContent =
+"GLASANJE SE OTVARA ZA";
 
-        }
+}else{
 
-
-        if(remaining <= 0){
-
-            clearInterval(
-                timerInterval
-            );
+remaining =
+closeTime - now;
 
 
-            loadPublic();
+$`("timerLabel").textContent =
+"GLASANJE SE ZATVARA ZA";
 
-            return;
-
-        }
-
-
-        $("timer").textContent =
-            formatTime(
-                remaining
-            );
-
-    }
+}
 
 
-    update();
+if(remaining <= 0){
+
+clearInterval(
+timerInterval
+);
 
 
-    timerInterval =
-        setInterval(
-            update,
-            1000
-        );
+loadPublic();
+
+return;
+
+}
+
+
+`$("timer").textContent =
+formatTime(
+remaining
+);
+
+}
+
+
+update();
+
+
+timerInterval =
+setInterval(
+update,
+1000
+);
 
 }
 
 
 /* =====================================================
-   JAVNI DIO
+JAVNI DIO
 ===================================================== */
 
 async function loadPublic(){
 
-    const id =
-        await findActiveMatch();
+const id =
+await findActiveMatch();
 
 
-    if(!id){
+if(!id){
 
-        $("matchTitle").textContent =
-            "Nema aktivnog glasanja";
+$`("matchTitle").textContent =
+"Nema aktivnog glasanja";
 
 
-        $("matchInfo").textContent =
-            "Trenutno nema objavljene utakmice.";
+`$("matchInfo").textContent =
+"Trenutno nema objavljene utakmice.";
 
 
-        $("voteStatus").className =
-            "status closed";
+$`("voteStatus").className =
+"status closed";
 
 
-        $("voteStatus").textContent =
-            "NEMA GLASANJA";
+`$("voteStatus").textContent =
+"NEMA GLASANJA";
 
 
-        $("voteMessage").textContent =
-            "Admin još nije otvorio glasanje.";
+$`("voteMessage").textContent =
+"Admin još nije otvorio glasanje.";
 
 
-        $("timer").textContent =
-            "--:--:--";
+`$("timer").textContent =
+"--:--:--";
 
 
-        $("players").innerHTML =
-            "";
+$`("players").innerHTML =
+"";
 
 
-        return;
+return;
 
-    }
+}
 
 
-    const matchResult =
-        await sb
-        .from("matches")
-        .select("*")
-        .eq("id",id)
-        .eq("status","published")
-        .maybeSingle();
+const matchResult =
+await sb
+.from("matches")
+.select("*")
+.eq("id",id)
+.eq("status","published")
+.maybeSingle();
 
 
-    if(
-        matchResult.error ||
-        !matchResult.data
-    ){
+if(
+matchResult.error ||
+!matchResult.data
+){
 
-        $("matchTitle").textContent =
-            "Utakmica nije pronađena";
+`$("matchTitle").textContent =
+"Utakmica nije pronađena";
 
 
-        $("matchInfo").textContent =
-            "Provjeri poveznicu.";
+$`("matchInfo").textContent =
+"Provjeri poveznicu.";
 
 
-        $("players").innerHTML =
-            "";
+`$("players").innerHTML =
+"";
 
 
-        return;
+return;
 
-    }
+}
 
 
-    selectedMatch =
-        matchResult.data;
+selectedMatch =
+matchResult.data;
 
 
-    $("matchTitle").textContent =
-        matchResult.data.home_team
-        +
-        " — "
-        +
-        matchResult.data.away_team;
+$`("matchTitle").textContent =
+matchResult.data.home_team
++
+" — "
++
+matchResult.data.away_team;
 
 
-    $("matchInfo").textContent =
-        "Datum: "
-        +
-        new Date(
-            matchResult.data.match_date
-            +
-            "T12:00:00"
-        ).toLocaleDateString(
-            "hr-HR"
-        );
+`$("matchInfo").textContent =
+"Datum: "
++
+new Date(
+matchResult.data.match_date
++
+"T12:00:00"
+).toLocaleDateString(
+"hr-HR"
+);
 
 
-    const now =
-        Date.now();
+const now =
+Date.now();
 
 
-    const openTime =
-        new Date(
-            matchResult.data.voting_opens_at
-        ).getTime();
+const openTime =
+new Date(
+matchResult.data.voting_opens_at
+).getTime();
 
 
-    const closeTime =
-        new Date(
-            matchResult.data.voting_closes_at
-        ).getTime();
+const closeTime =
+new Date(
+matchResult.data.voting_closes_at
+).getTime();
 
 
-    let state;
+let state;
 
 
-    if(now < openTime){
+if(now < openTime){
 
-        state = "wait";
+state = "wait";
 
-    }else if(now >= closeTime){
+}else if(now >= closeTime){
 
-        state = "closed";
-
-    }else{
-
-        state = "open";
-
-    }
-
-
-    /* STATUS */
-
-    $("voteStatus").className =
-        "status "
-        +
-        state;
-
-
-    if(state === "open"){
-
-        $("voteStatus").textContent =
-            "GLASANJE OTVORENO";
-
-
-        $("voteMessage").textContent =
-            "Odaberi jednog igrača. Svaki uređaj može glasati jednom.";
-
-    }
-
-
-    if(state === "wait"){
-
-        $("voteStatus").textContent =
-            "GLASANJE JOŠ NIJE OTVORENO";
-
-
-        $("voteMessage").textContent =
-            "Glasanje će se automatski otvoriti u zadano vrijeme.";
-
-    }
-
-
-    if(state === "closed"){
-
-        $("voteStatus").textContent =
-            "GLASANJE ZATVORENO";
-
-
-        $("voteMessage").textContent =
-            "Glasanje je završeno.";
-
-    }
-
-
-    /* TIMER */
-
-    if(state !== "closed"){
-
-        startTimer(
-            openTime,
-            closeTime,
-            state
-        );
-
-    }else{
-
-        clearInterval(
-            timerInterval
-        );
-
-
-        $("timerLabel").textContent =
-            "GLASANJE JE ZATVORENO";
-
-
-        $("timer").textContent =
-            "00:00:00";
-
-    }
-
-
-    /* IGRAČI */
-
-    const playersResult =
-        await sb
-        .from("players")
-        .select("*")
-        .eq(
-            "match_id",
-            id
-        )
-        .order(
-            "shirt_number",
-            {
-                ascending:true
-            }
-        );
-
-
-    if(playersResult.error){
-
-        $("players").innerHTML =
-            "<div class='notice'>Greška pri učitavanju igrača.</div>";
-
-
-        return;
-
-    }
-
-
-    const alreadyVoted =
-        localStorage.getItem(
-            "voted_" + id
-        ) === "1";
-
-
-    if(
-        !playersResult.data ||
-        playersResult.data.length === 0
-    ){
-
-        $("players").innerHTML =
-            "<div class='notice'>Igrači još nisu uneseni.</div>";
-
-
-    }else{
-
-        $("players").innerHTML =
-            playersResult.data
-            .map(function(player){
-
-                const disabled =
-                    state !== "open"
-                    ||
-                    alreadyVoted;
-
-
-                const buttonText =
-                    alreadyVoted
-                    ?
-                    "GLAS VEĆ ZABILJEŽEN"
-                    :
-                    "GLASAJ";
-
-
-                return `
-
-                <div class="player">
-
-                    <div>
-
-                        <div class="player-number">
-                            BROJ ${esc(
-                                player.shirt_number || "—"
-                            )}
-                        </div>
-
-                        <div class="player-name">
-                            ${esc(player.name)}
-                        </div>
-
-                    </div>
-
-                    <button
-                        data-player="${player.id}"
-                        ${disabled ? "disabled" : ""}
-                    >
-                        ${buttonText}
-                    </button>
-
-                </div>
-
-                `;
-
-            })
-            .join("");
-
-
-        document
-        .querySelectorAll(
-            "[data-player]"
-        )
-        .forEach(function(button){
-
-            button.addEventListener(
-                "click",
-                function(){
-
-                    vote(
-                        button.dataset.player
-                    );
-
-                }
-            );
-
-        });
-
-    }
-
-
-    /* REZULTATI */
-
-    if(state === "closed"){
-
-    await loadResults(id);
+state = "closed";
 
 }else{
 
-    $("results").classList.add(
-        "hidden"
-    );
+state = "open";
 
-    }
+}
 
-    
+
+/* STATUS */
+
+$`("voteStatus").className =
+"status "
++
+state;
+
+
+if(state === "open"){
+
+`$("voteStatus").textContent =
+"GLASANJE OTVORENO";
+
+
+$`("voteMessage").textContent =
+"Odaberi jednog igrača. Svaki uređaj može glasati jednom.";
+
+}
+
+
+if(state === "wait"){
+
+`$("voteStatus").textContent =
+"GLASANJE JOŠ NIJE OTVORENO";
+
+
+$`("voteMessage").textContent =
+"Glasanje će se automatski otvoriti u zadano vrijeme.";
+
+}
+
+
+if(state === "closed"){
+
+`$("voteStatus").textContent =
+"GLASANJE ZATVORENO";
+
+
+$`("voteMessage").textContent =
+"Glasanje je završeno.";
+
+}
+
+
+/* TIMER */
+
+if(state !== "closed"){
+
+startTimer(
+openTime,
+closeTime,
+state
+);
+
+}else{
+
+clearInterval(
+timerInterval
+);
+
+
+`$("timerLabel").textContent =
+"GLASANJE JE ZATVORENO";
+
+
+$`("timer").textContent =
+"00:00:00";
+
+}
+
+
+/* IGRAČI */
+
+const playersResult =
+await sb
+.from("players")
+.select("*")
+.eq(
+"match_id",
+id
+)
+.order(
+"shirt_number",
+{
+ascending:true
+}
+);
+
+
+if(playersResult.error){
+
+`$("players").innerHTML =
+"<div class='notice'>Greška pri učitavanju igrača.</div>";
+
+
+return;
+
+}
+
+
+const alreadyVoted =
+localStorage.getItem(
+"voted_" + id
+) === "1";
+
+
+if(
+!playersResult.data ||
+playersResult.data.length === 0
+){
+
+$`("players").innerHTML =
+"<div class='notice'>Igrači još nisu uneseni.</div>";
+
+
+}else{
+
+`$("players").innerHTML =
+playersResult.data
+.map(function(player){
+
+const disabled =
+state !== "open"
+||
+alreadyVoted;
+
+
+const buttonText =
+alreadyVoted
+?
+"GLAS VEĆ ZABILJEŽEN"
+:
+"GLASAJ";
+
+
+return `
+
+<div class="player">
+
+<div>
+
+<div class="player-number">
+BROJ $`{esc(
+player.shirt_number || "—"
+)}
+</div>
+
+<div class="player-name">
+`${esc(player.name)}
+</div>
+
+</div>
+
+<button
+data-player=" {disabled ? "disabled" : ""}
+>
+$`{buttonText}
+</button>
+
+</div>
+
+`;
+
+})
+.join("");
+
+
+document
+.querySelectorAll(
+"[data-player]"
+)
+.forEach(function(button){
+
+button.addEventListener(
+"click",
+function(){
+
+vote(
+button.dataset.player
+);
+
+}
+);
+
+});
+
+}
+
+
+/* REZULTATI */
+
+if(state === "closed"){
+
+await loadResults(id);
+
+}else{
+
+$("results").classList.add(
+"hidden"
+);
+
+}
+
 
 }
 
 
 /* =====================================================
-   GLASANJE
+GLASANJE
 ===================================================== */
 
 async function vote(
-    playerId
+playerId
 ){
 
-    if(!selectedMatch){
+if(!selectedMatch){
 
-        return;
+return;
 
-    }
-
-
-    const result =
-        await sb.rpc(
-            "submit_vote",
-            {
-                p_match_id:
-                    selectedMatch.id,
-
-                p_player_id:
-                    playerId,
-
-                p_device_hash:
-                    deviceToken()
-            }
-        );
+}
 
 
-    if(result.error){
+const result =
+await sb.rpc(
+"submit_vote",
+{
+p_match_id:
+selectedMatch.id,
 
-        alert(
-            "Greška pri slanju glasa: "
-            +
-            result.error.message
-        );
+p_player_id:
+playerId,
 
-
-        return;
-
-    }
-
-
-    if(
-        result.data &&
-        result.data.success
-    ){
-
-        localStorage.setItem(
-            "voted_" +
-            selectedMatch.id,
-            "1"
-        );
+p_device_hash:
+deviceToken()
+}
+);
 
 
-        alert(
-            "Hvala! Vaš glas je zabilježen."
-        );
+if(result.error){
+
+alert(
+"Greška pri slanju glasa: "
++
+result.error.message
+);
 
 
-        await loadPublic();
+return;
+
+}
 
 
-    }else{
+if(
+result.data &&
+result.data.success
+){
 
-        alert(
-            result.data &&
-            result.data.message
-            ?
-            result.data.message
-            :
-            "Glas nije zaprimljen."
-        );
+localStorage.setItem(
+"voted_" +
+selectedMatch.id,
+"1"
+);
 
-    }
+
+alert(
+"Hvala! Vaš glas je zabilježen."
+);
+
+
+await loadPublic();
+
+
+}else{
+
+alert(
+result.data &&
+result.data.message
+?
+result.data.message
+:
+"Glas nije zaprimljen."
+);
+
+}
 
 }
 
 
 /* =====================================================
-   REZULTATI
+REZULTATI
 ===================================================== */
 
 async function loadResults(
-    id
+id
 ){
 
-    const result =
-        await sb.rpc(
-            "get_match_results",
-            {
-                p_match_id:id
-            }
-        );
+const result =
+await sb.rpc(
+"get_match_results",
+{
+p_match_id:id
+}
+);
 
 
-    if(result.error){
+if(result.error){
 
-        return;
+return;
 
-    }
-
-
-    const rows =
-        result.data || [];
+}
 
 
-    const total =
-        rows.reduce(
-            function(sum,row){
-
-                return (
-                    sum
-                    +
-                    Number(
-                        row.vote_count
-                    )
-                );
-
-            },
-            0
-        );
+const rows =
+result.data || [];
 
 
-    $("results").classList.remove(
-        "hidden"
-    );
+const total =
+rows.reduce(
+function(sum,row){
+
+return (
+sum
++
+Number(
+row.vote_count
+)
+);
+
+},
+0
+);
 
 
-    let html =
-        "<h2>Rezultati</h2>";
+$`("results").classList.remove(
+"hidden"
+);
 
 
-    rows.forEach(function(row){
-
-        const percentage =
-            total
-            ?
-            Math.round(
-                Number(
-                    row.vote_count
-                )
-                *
-                100
-                /
-                total
-            )
-            :
-            0;
+let html =
+"<h2>Rezultati</h2>";
 
 
-        html += `
+rows.forEach(function(row){
 
-        <div class="result-row">
-
-            <b>
-                ${esc(row.player_name)}
-            </b>
-
-            —
-            ${row.vote_count}
-            glasova
-            (${percentage}%)
-
-            <div class="bar">
-
-                <div
-                    class="fill"
-                    style="width:${percentage}%"
-                ></div>
-
-            </div>
-
-        </div>
-
-        `;
-
-    });
+const percentage =
+total
+?
+Math.round(
+Number(
+row.vote_count
+)
+*
+100
+/
+total
+)
+:
+0;
 
 
-    html += `
+html += `
 
-        <p class="small">
-            Ukupno glasova: ${total}
-        </p>
+<div class="result-row">
 
-    `;
+<b>
+`${esc(row.player_name)}
+</b>
+
+—
+ {percentage}%)
+
+<div class="bar">
+
+<div
+class="fill"
+style="width:$`{percentage}%"
+></div>
+
+</div>
+
+</div>
+
+`;
+
+});
 
 
-    $("results").innerHTML =
-        html;
+html += `
+
+<p class="small">
+Ukupno glasova: `${total}
+</p>
+
+`;
+
+
+$`("results").innerHTML =
+html;
 
 }
 
 
 /* =====================================================
-   ADMIN — UTAKMICE
+ADMIN — UTAKMICE
 ===================================================== */
 
 async function loadMatches(){
 
-    const result =
-        await sb
-        .from("matches")
-        .select("*")
-        .order(
-            "match_date",
-            {
-                ascending:false
-            }
-        );
+const result =
+await sb
+.from("matches")
+.select("*")
+.order(
+"match_date",
+{
+ascending:false
+}
+);
 
 
-    if(result.error){
+if(result.error){
 
-        $("matchList").textContent =
-            "Greška: "
-            +
-            result.error.message;
-
-
-        return;
-
-    }
+`$("matchList").textContent =
+"Greška: "
++
+result.error.message;
 
 
-    if(
-        !result.data ||
-        result.data.length === 0
-    ){
+return;
 
-        $("matchList").innerHTML =
-            "<div class='notice'>Nema utakmica.</div>";
+}
 
 
-        return;
+if(
+!result.data ||
+result.data.length === 0
+){
 
-    }
-
-
-    $("matchList").innerHTML =
-        result.data
-        .map(function(match){
-
-            return `
-
-            <div class="admin-match">
-
-                <b>
-                    ${esc(match.home_team)}
-                    —
-                    ${esc(match.away_team)}
-                </b>
-
-                <br>
-
-                <span class="small">
-
-                    ${esc(match.match_date)}
-                    •
-                    ${esc(match.status)}
-
-                </span>
-
-                <div class="admin-actions">
-
-                    <button
-                        data-manage="${match.id}"
-                        class="blue-button"
-                    >
-                        UPRAVLJAJ IGRAČIMA
-                    </button>
-
-                </div>
-
-            </div>
-
-            `;
-
-        })
-        .join("");
+$`("matchList").innerHTML =
+"<div class='notice'>Nema utakmica.</div>";
 
 
-    document
-    .querySelectorAll(
-        "[data-manage]"
-    )
-    .forEach(function(button){
+return;
 
-        button.addEventListener(
-            "click",
-            function(){
+}
 
-                manageMatch(
-                    button.dataset.manage
-                );
 
-            }
-        );
+`$("matchList").innerHTML =
+result.data
+.map(function(match){
 
-    });
+return `
+
+<div class="admin-match">
+
+<b>
+ {esc(match.away_team)}
+</b>
+
+<br>
+
+<span class="small">
+
+ {esc(match.status)}
+
+</span>
+
+<div class="admin-actions">
+
+<button
+data-manage="$`{match.id}"
+class="blue-button"
+>
+UPRAVLJAJ IGRAČIMA
+</button>
+
+</div>
+
+</div>
+
+`;
+
+})
+.join("");
+
+
+document
+.querySelectorAll(
+"[data-manage]"
+)
+.forEach(function(button){
+
+button.addEventListener(
+"click",
+function(){
+
+manageMatch(
+button.dataset.manage
+);
+
+}
+);
+
+});
 
 }
 
 
 /* =====================================================
-   ADMIN — SPREMI UTAKMICU
+ADMIN — SPREMI UTAKMICU
 ===================================================== */
 
 async function saveMatch(){
 
-    const home =
-        $("homeTeam")
-        .value
-        .trim();
+const home =
+`$("homeTeam")
+.value
+.trim();
 
 
-    const away =
-        $("awayTeam")
-        .value
-        .trim();
+const away =
+$`("awayTeam")
+.value
+.trim();
 
 
-    const date =
-        $("matchDate")
-        .value;
+const date =
+`$("matchDate")
+.value;
 
 
-    const open =
-        $("openTime")
-        .value;
+const open =
+$`("openTime")
+.value;
 
 
-    const close =
-        $("closeTime")
-        .value;
+const close =
+`$("closeTime")
+.value;
 
 
-    if(
-        !home ||
-        !away ||
-        !date ||
-        !open ||
-        !close
-    ){
+if(
+!home ||
+!away ||
+!date ||
+!open ||
+!close
+){
 
-        $("adminMessage").textContent =
-            "Popuni sva polja.";
-
-
-        return;
-
-    }
+$`("adminMessage").textContent =
+"Popuni sva polja.";
 
 
-    if(
-        new Date(close)
-        <=
-        new Date(open)
-    ){
+return;
 
-        $("adminMessage").textContent =
-            "Vrijeme zatvaranja mora biti nakon otvaranja.";
+}
 
 
-        return;
+if(
+new Date(close)
+<=
+new Date(open)
+){
 
-    }
-
-
-    const result =
-        await sb
-        .from("matches")
-        .insert({
-
-            home_team:
-                home,
-
-            away_team:
-                away,
-
-            match_date:
-                date,
-
-            voting_opens_at:
-                new Date(open)
-                .toISOString(),
-
-            voting_closes_at:
-                new Date(close)
-                .toISOString(),
-
-            status:
-                $("matchStatus").value,
-
-            show_results_after_close:
-                $("resultsAfter").checked
-
-        })
-        .select()
-        .single();
+`$("adminMessage").textContent =
+"Vrijeme zatvaranja mora biti nakon otvaranja.";
 
 
-    if(result.error){
+return;
 
-        $("adminMessage").textContent =
-            "Greška: "
-            +
-            result.error.message;
+}
 
 
-        return;
+const result =
+await sb
+.from("matches")
+.insert({
 
-    }
+home_team:
+home,
+
+away_team:
+away,
+
+match_date:
+date,
+
+voting_opens_at:
+new Date(open)
+.toISOString(),
+
+voting_closes_at:
+new Date(close)
+.toISOString(),
+
+status:
+$`("matchStatus").value,
+
+show_results_after_close:
+`$("resultsAfter").checked
+
+})
+.select()
+.single();
 
 
-    $("adminMessage").textContent =
-        "Utakmica uspješno spremljena.";
+if(result.error){
+
+$`("adminMessage").textContent =
+"Greška: "
++
+result.error.message;
 
 
-    await loadMatches();
+return;
+
+}
 
 
-    await manageMatch(
-        result.data.id
-    );
+`$("adminMessage").textContent =
+"Utakmica uspješno spremljena.";
+
+
+await loadMatches();
+
+
+await manageMatch(
+result.data.id
+);
 
 }
 
 
 /* =====================================================
-   ADMIN — UPRAVLJANJE IGRAČIMA
+ADMIN — UPRAVLJANJE IGRAČIMA
 ===================================================== */
 
 async function manageMatch(
-    id
+id
 ){
 
-    const result =
-        await sb
-        .from("matches")
-        .select("*")
-        .eq(
-            "id",
-            id
-        )
-        .single();
+const result =
+await sb
+.from("matches")
+.select("*")
+.eq(
+"id",
+id
+)
+.single();
 
 
-    if(result.error){
+if(result.error){
 
-        alert(
-            result.error.message
-        );
-
-
-        return;
-
-    }
+alert(
+result.error.message
+);
 
 
-    selectedMatch =
-        result.data;
+return;
+
+}
 
 
-    $("manageView")
-        .classList
-        .remove("hidden");
+selectedMatch =
+result.data;
 
 
-    $("selectedMatch").textContent =
-        result.data.home_team
-        +
-        " — "
-        +
-        result.data.away_team
-        +
-        " | "
-        +
-        result.data.match_date;
+$`("manageView")
+.classList
+.remove("hidden");
 
 
-    const playersResult =
-        await sb
-        .from("players")
-        .select("*")
-        .eq(
-            "match_id",
-            id
-        )
-        .order(
-            "shirt_number",
-            {
-                ascending:true
-            }
-        );
+`$("selectedMatch").textContent =
+result.data.home_team
++
+" — "
++
+result.data.away_team
++
+" | "
++
+result.data.match_date;
 
 
-    if(
-        !playersResult.data ||
-        playersResult.data.length === 0
-    ){
-
-        $("playerList").innerHTML =
-            "<div class='notice'>Nema igrača.</div>";
-
-
-        return;
-
-    }
-
-
-    $("playerList").innerHTML =
-        playersResult.data
-        .map(function(player){
-
-            return `
-
-            <div class="admin-match">
-
-                <b>
-                    #
-                    ${esc(
-                        player.shirt_number || "—"
-                    )}
-
-                    ${esc(
-                        player.name
-                    )}
-                </b>
-
-                <button
-                    class="red-button"
-                    data-delete="${player.id}"
-                >
-                    OBRIŠI
-                </button>
-
-            </div>
-
-            `;
-
-        })
-        .join("");
+const playersResult =
+await sb
+.from("players")
+.select("*")
+.eq(
+"match_id",
+id
+)
+.order(
+"shirt_number",
+{
+ascending:true
+}
+);
 
 
-    document
-    .querySelectorAll(
-        "[data-delete]"
-    )
-    .forEach(function(button){
+if(
+!playersResult.data ||
+playersResult.data.length === 0
+){
 
-        button.addEventListener(
-            "click",
-            function(){
+$`("playerList").innerHTML =
+"<div class='notice'>Nema igrača.</div>";
 
-                deletePlayer(
-                    button.dataset.delete,
-                    id
-                );
 
-            }
-        );
+return;
 
-    });
+}
+
+
+`$("playerList").innerHTML =
+playersResult.data
+.map(function(player){
+
+return `
+
+<div class="admin-match">
+
+<b>
+#
+$`{esc(
+player.shirt_number || "—"
+)}
+
+`${esc(
+player.name
+)}
+</b>
+
+<button
+class="red-button"
+data-delete="$`{player.id}"
+>
+OBRIŠI
+</button>
+
+</div>
+
+`;
+
+})
+.join("");
+
+
+document
+.querySelectorAll(
+"[data-delete]"
+)
+.forEach(function(button){
+
+button.addEventListener(
+"click",
+function(){
+
+deletePlayer(
+button.dataset.delete,
+id
+);
+
+}
+);
+
+});
 
 }
 
 
 /* =====================================================
-   ADMIN — DODAJ IGRAČA
+ADMIN — DODAJ IGRAČA
 ===================================================== */
 
 async function addPlayer(){
 
-    if(!selectedMatch){
+if(!selectedMatch){
 
-        return;
+return;
 
-    }
-
-
-    const name =
-        $("playerName")
-        .value
-        .trim();
+}
 
 
-    const number =
-        Number(
-            $("playerNumber")
-            .value
-        )
-        ||
-        null;
+const name =
+`$("playerName")
+.value
+.trim();
 
 
-    if(!name){
-
-        alert(
-            "Unesi ime igrača."
-        );
-
-
-        return;
-
-    }
+const number =
+Number(
+$`("playerNumber")
+.value
+)
+||
+null;
 
 
-    const result =
-        await sb
-        .from("players")
-        .insert({
+if(!name){
 
-            match_id:
-                selectedMatch.id,
-
-            name:
-                name,
-
-            shirt_number:
-                number
-
-        });
+alert(
+"Unesi ime igrača."
+);
 
 
-    if(result.error){
+return;
 
-        alert(
-            "Greška: "
-            +
-            result.error.message
-        );
+}
 
 
-        return;
+const result =
+await sb
+.from("players")
+.insert({
 
-    }
+match_id:
+selectedMatch.id,
+
+name:
+name,
+
+shirt_number:
+number
+
+});
 
 
-    $("playerName").value =
-        "";
+if(result.error){
+
+alert(
+"Greška: "
++
+result.error.message
+);
 
 
-    $("playerNumber").value =
-        "";
+return;
+
+}
 
 
-    await manageMatch(
-        selectedMatch.id
-    );
+`$("playerName").value =
+"";
+
+
+$`("playerNumber").value =
+"";
+
+
+await manageMatch(
+selectedMatch.id
+);
 
 }
 
 
 /* =====================================================
-   ADMIN — OBRIŠI IGRAČA
+ADMIN — OBRIŠI IGRAČA
 ===================================================== */
 
 async function deletePlayer(
-    playerId,
-    matchId
+playerId,
+matchId
 ){
 
-    if(
-        !confirm(
-            "Želiš li obrisati ovog igrača?"
-        )
-    ){
+if(
+!confirm(
+"Želiš li obrisati ovog igrača?"
+)
+){
 
-        return;
+return;
 
-    }
-
-
-    const result =
-        await sb
-        .from("players")
-        .delete()
-        .eq(
-            "id",
-            playerId
-        );
+}
 
 
-    if(result.error){
-
-        alert(
-            result.error.message
-        );
-
-
-        return;
-
-    }
+const result =
+await sb
+.from("players")
+.delete()
+.eq(
+"id",
+playerId
+);
 
 
-    await manageMatch(
-        matchId
-    );
+if(result.error){
+
+alert(
+result.error.message
+);
+
+
+return;
+
+}
+
+
+await manageMatch(
+matchId
+);
 
 }
 
 
 /* =====================================================
-   PRIKAZ JAVNOG DIJELA
+PRIKAZ JAVNOG DIJELA
 ===================================================== */
 
 function publicMode(){
 
-    $("publicView")
-        .classList
-        .remove("hidden");
+`$("publicView")
+.classList
+.remove("hidden");
 
 
-    $("loginView")
-        .classList
-        .add("hidden");
+$`("loginView")
+.classList
+.add("hidden");
 
 
-    $("adminView")
-        .classList
-        .add("hidden");
+`$("adminView")
+.classList
+.add("hidden");
 
 
-    $("publicBtn")
-        .classList
-        .add("active");
+$`("publicBtn")
+.classList
+.add("active");
 
 
-    $("adminBtn")
-        .classList
-        .remove("active");
+`$("adminBtn")
+.classList
+.remove("active");
 
 
-    loadPublic();
+loadPublic();
 
 }
 
 
 /* =====================================================
-   ADMIN MODE
+ADMIN MODE
 ===================================================== */
 
 async function adminMode(){
 
-    $("publicView")
-        .classList
-        .add("hidden");
+$`("publicView")
+.classList
+.add("hidden");
 
 
-    $("publicBtn")
-        .classList
-        .remove("active");
+`$("publicBtn")
+.classList
+.remove("active");
 
 
-    $("adminBtn")
-        .classList
-        .add("active");
+$`("adminBtn")
+.classList
+.add("active");
 
 
-    const sessionResult =
-        await sb.auth.getSession();
+const sessionResult =
+await sb.auth.getSession();
 
 
-    if(
-        sessionResult.data.session
-    ){
+if(
+sessionResult.data.session
+){
 
-        $("loginView")
-            .classList
-            .add("hidden");
-
-
-        $("adminView")
-            .classList
-            .remove("hidden");
+`$("loginView")
+.classList
+.add("hidden");
 
 
-        loadMatches();
+$`("adminView")
+.classList
+.remove("hidden");
 
 
-    }else{
-
-        $("loginView")
-            .classList
-            .remove("hidden");
+loadMatches();
 
 
-        $("adminView")
-            .classList
-            .add("hidden");
+}else{
 
-    }
+`$("loginView")
+.classList
+.remove("hidden");
+
+
+$`("adminView")
+.classList
+.add("hidden");
+
+}
 
 }
 
 
 /* =====================================================
-   LOGIN
+LOGIN
 ===================================================== */
 
 async function login(){
 
-    const email =
-        $("email")
-        .value
-        .trim();
+const email =
+`$("email")
+.value
+.trim();
 
 
-    const password =
-        $("password")
-        .value;
+const password =
+$`("password")
+.value;
 
 
-    const result =
-        await sb.auth.signInWithPassword({
+const result =
+await sb.auth.signInWithPassword({
 
-            email:
-                email,
+email:
+email,
 
-            password:
-                password
+password:
+password
 
-        });
-
-
-    if(result.error){
-
-        $("loginMessage").textContent =
-            "Greška: "
-            +
-            result.error.message;
+});
 
 
-        return;
+if(result.error){
 
-    }
-
-
-    $("loginMessage").textContent =
-        "";
-
-
-    $("loginView")
-        .classList
-        .add("hidden");
+`$("loginMessage").textContent =
+"Greška: "
++
+result.error.message;
 
 
-    $("adminView")
-        .classList
-        .remove("hidden");
+return;
+
+}
 
 
-    await loadMatches();
+$`("loginMessage").textContent =
+"";
+
+
+`$("loginView")
+.classList
+.add("hidden");
+
+
+$`("adminView")
+.classList
+.remove("hidden");
+
+
+await loadMatches();
 
 }
 
 
 /* =====================================================
-   LOGOUT
+LOGOUT
 ===================================================== */
 
 async function logout(){
 
-    await sb.auth.signOut();
+await sb.auth.signOut();
 
 
-    publicMode();
+publicMode();
 
 }
 
 
 /* =====================================================
-   EVENT LISTENERS
+EVENT LISTENERS
 ===================================================== */
 
-$("publicBtn")
-    .addEventListener(
-        "click",
-        publicMode
-    );
+`$("publicBtn")
+.addEventListener(
+"click",
+publicMode
+);
 
 
-$("adminBtn")
-    .addEventListener(
-        "click",
-        adminMode
-    );
+$`("adminBtn")
+.addEventListener(
+"click",
+adminMode
+);
 
 
-$("loginBtn")
-    .addEventListener(
-        "click",
-        login
-    );
+`$("loginBtn")
+.addEventListener(
+"click",
+login
+);
 
 
-$("logoutBtn")
-    .addEventListener(
-        "click",
-        logout
-    );
+$`("logoutBtn")
+.addEventListener(
+"click",
+logout
+);
 
 
-$("saveMatchBtn")
-    .addEventListener(
-        "click",
-        saveMatch
-    );
+`$("saveMatchBtn")
+.addEventListener(
+"click",
+saveMatch
+);
 
 
 $("addPlayerBtn")
-    .addEventListener(
-        "click",
-        addPlayer
-    );
+.addEventListener(
+"click",
+addPlayer
+);
 
 
 /* =====================================================
-   START
+START
 ===================================================== */
 
 publicMode();
@@ -2367,4 +2356,4 @@ publicMode();
 </script>
 
 </body>
- </html>
+    </html>
