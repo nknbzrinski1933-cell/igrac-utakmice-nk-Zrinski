@@ -1420,21 +1420,19 @@ async function loadPublic(){
 
     /* REZULTATI */
 
-    if(
-        state === "closed"
-        &&
-        matchResult.data.show_results_after_close
-    ){
+    if(state === "closed"){
 
-        await loadResults(id);
+    await loadResults(id);
 
-    }else{
+}else{
 
-        $("results").classList.add(
-            "hidden"
-        );
+    $("results").classList.add(
+        "hidden"
+    );
 
     }
+
+    
 
 }
 
