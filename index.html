@@ -1418,13 +1418,34 @@ button.dataset.player
 
 if(state === "closed"){
 
-await loadResults(id);
+    const closedAt =
+        new Date(
+            matchResult.data.voting_closes_at
+        ).getTime();
+
+    const twentyFourHours =
+        24 * 60 * 60 * 1000;
+
+    const resultsExpireAt =
+        closedAt + twentyFourHours;
+
+    if(Date.now() < resultsExpireAt){
+
+        await loadResults(id);
+
+    }else{
+
+        $("results").classList.add(
+            "hidden"
+        );
+
+    }
 
 }else{
 
-$("results").classList.add(
-"hidden"
-);
+    $("results").classList.add(
+        "hidden"
+    );
 
 }
 
