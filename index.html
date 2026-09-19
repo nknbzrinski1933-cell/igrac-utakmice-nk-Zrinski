@@ -9,8 +9,83 @@
 .pn{font-size:14px;line-height:1.15}
 .pc button{padding:10px 6px;font-size:13px}
 }
+
+/* ===== VISUAL POLISH ===== */
+body{
+  background:
+    radial-gradient(circle at 85% 0%,rgba(18,56,232,.22),transparent 34%),
+    radial-gradient(circle at 10% 95%,rgba(227,6,19,.16),transparent 28%),
+    linear-gradient(160deg,#03050a 0%,#07101b 52%,#05070d 100%);
+}
+header{padding:10px 0 4px}
+header h1{letter-spacing:1.2px;font-size:30px;margin:12px 0 3px}
+.logo{box-shadow:0 10px 35px rgba(18,56,232,.25);border:1px solid rgba(255,255,255,.18)}
+.card{box-shadow:0 18px 45px rgba(0,0,0,.26);backdrop-filter:blur(8px)}
+.title{
+  padding:6px 4px 2px;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+}
+.status{letter-spacing:.7px}
+.players{margin-top:14px}
+.pc{
+  position:relative;
+  transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;
+  border-color:rgba(255,255,255,.08);
+}
+.pc:hover{transform:translateY(-2px);border-color:rgba(18,56,232,.55);box-shadow:0 12px 30px rgba(0,0,0,.28)}
+.photo{display:block}
+.pb{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,0)),
+    #0b111d;
+}
+.pb .muted{
+  text-transform:uppercase;
+  letter-spacing:.9px;
+  font-size:11px;
+}
+.pn{margin-top:3px}
+.pc button{
+  background:linear-gradient(135deg,#e30613,#b70510);
+  box-shadow:0 7px 18px rgba(227,6,19,.22);
+}
+.pc button:not(:disabled):active{transform:scale(.98)}
+#winnerBox{
+  margin-top:16px;
+  padding:16px;
+  border-radius:16px;
+  background:linear-gradient(135deg,rgba(227,6,19,.18),rgba(18,56,232,.16));
+  border:1px solid rgba(255,255,255,.1);
+  text-align:center;
+}
+#winnerBox .winner-title{
+  font-size:12px;
+  color:var(--m);
+  letter-spacing:1.4px;
+  text-transform:uppercase;
+}
+#winnerBox .winner-name{
+  font-size:24px;
+  font-weight:900;
+  margin-top:4px;
+}
+#winnerBox .winner-votes{margin-top:4px;color:#dbe4f0}
+#adminResults .row{padding:10px 0}
+#adminResults .row:first-of-type{border-top:1px solid var(--l)}
+@media(max-width:560px){
+  header h1{font-size:24px}
+  .title{font-size:21px}
+  .players{gap:8px}
+  .pc{border-radius:14px}
+  .photo{aspect-ratio:1/1}
+  .pb{padding:8px}
+  .pn{font-size:13px;min-height:30px}
+  .pc button{font-size:12px;padding:9px 4px}
+}
+
 </style></head><body><div class="wrap"><header><img src="logo.png" class="logo"><h1>IGRAČ UTAKMICE</h1><div class="muted">NK Zrinski Nova Bukovica</div><div class="nav"><button id="pubB" class="active">GLASANJE</button><button id="admB">ADMIN</button></div></header>
-<section id="pub"><div class="card"><div id="mt" class="title">Učitavanje...</div><div id="mi" class="center muted"></div><div id="vs" class="status wait">UČITAVANJE</div><div id="tl" class="center muted"></div><div id="tm" class="timer">--:--:--</div><div id="msg" class="notice"></div><div id="plist" class="players"></div><div id="results" class="hidden"></div></div></section>
+<section id="pub"><div class="card"><div id="mt" class="title">Učitavanje...</div><div id="mi" class="center muted"></div><div id="vs" class="status wait">UČITAVANJE</div><div id="tl" class="center muted"></div><div id="tm" class="timer">--:--:--</div><div id="msg" class="notice"></div><div id="plist" class="players"></div><div id="winnerBox" class="hidden"></div><div id="results" class="hidden"></div></div></section>
 <section id="login" class="card hidden"><h2>Admin prijava</h2><label>Email</label><input id="email" type="email"><label>Lozinka</label><input id="pass" type="password"><button id="loginB">PRIJAVI SE</button><div id="loginM"></div></section>
 <section id="admin" class="hidden"><div class="card"><h2>Nova utakmica</h2><div class="grid"><div><label>Domaći</label><input id="home" value="NK Zrinski"></div><div><label>Gosti</label><input id="away"></div></div><label>Datum</label><input id="date" type="date"><div class="grid"><div><label>Otvaranje</label><input id="op" type="datetime-local"></div><div><label>Zatvaranje</label><input id="cl" type="datetime-local"></div></div><label>Status</label><select id="st"><option value="published">Objavljeno</option><option value="draft">Nacrt</option></select><button id="saveB">SPREMI UTAKMICU</button><div id="am"></div></div>
 <div class="card"><h2>Stalni roster</h2><div class="grid"><div><label>Ime i prezime</label><input id="name"></div><div><label>Broj</label><input id="num" type="number"></div></div><label>URL fotografije (opcionalno)</label><input id="photo"><button id="addB">DODAJ U ROSTER</button><div id="roster"></div></div>
@@ -29,7 +104,27 @@ const sb=supabase.createClient("https://srfniisyvjohlrngpnee.supabase.co","sb_pu
 async function findMatch(){let q=new URLSearchParams(location.search).get("match");if(q)return q;let r=await sb.from("matches").select("*").eq("status","published").order("match_date",{ascending:false});if(!r.data?.length)return null;let n=Date.now(),a=r.data.find(x=>n>=new Date(x.voting_opens_at)&&n<new Date(x.voting_closes_at));if(a)return a.id;return r.data.filter(x=>new Date(x.voting_opens_at)>n).sort((a,b)=>new Date(a.voting_opens_at)-new Date(b.voting_opens_at))[0]?.id||null}
 async function loadPublic(){clearInterval(timer);let id=await findMatch();if(!id){$("mt").textContent="Nema aktivnog glasanja";$("vs").className="status closed";$("vs").textContent="NEMA GLASANJA";$("msg").textContent="Trenutno nema objavljene utakmice.";$("plist").innerHTML="";return}let r=await sb.from("matches").select("*").eq("id",id).maybeSingle();if(r.error||!r.data)return;selected=r.data;$("mt").textContent=r.data.home_team+" — "+r.data.away_team;$("mi").textContent=new Date(r.data.match_date+"T12:00:00").toLocaleDateString("hr-HR");let n=Date.now(),o=new Date(r.data.voting_opens_at).getTime(),c=new Date(r.data.voting_closes_at).getTime(),s=n<o?"wait":n<c?"open":"closed";$("vs").className="status "+s;$("vs").textContent=s==="open"?"GLASANJE OTVORENO":s==="wait"?"GLASANJE JOŠ NIJE OTVORENO":"GLASANJE ZATVORENO";if(s==="wait")tick(o,"OTVARA SE ZA");else if(s==="open")tick(c,"ZATVARA SE ZA");else{$("tl").textContent="GLASANJE ZAVRŠENO";$("tm").textContent="00:00:00"}let voted=localStorage.getItem("voted_"+id)==="1";$("msg").textContent=voted?"Vaš glas je već zabilježen.":s==="open"?"Odaberite igrača utakmice.":"Glasanje trenutno nije otvoreno.";let p=await sb.from("match_players").select("player_id,players(id,name,shirt_number,photo_url)").eq("match_id",id),rows=(p.data||[]).map(x=>x.players).filter(Boolean);$("plist").innerHTML=rows.length?rows.map(x=>`<div class="pc">${x.photo_url?`<img class="photo" src="${e(x.photo_url)}">`:`<div class="photo ph">⚽</div>`}<div class="pb"><div class="muted">BROJ ${e(x.shirt_number??"—")}</div><div class="pn">${e(x.name)}</div><button data-v="${x.id}" ${s!=="open"||voted?"disabled":""}>${voted?"GLAS ZABILJEŽEN":"GLASAJ"}</button></div></div>`).join(""):'<div class="notice">Igrači još nisu odabrani.</div>';document.querySelectorAll("[data-v]").forEach(b=>b.onclick=()=>vote(b.dataset.v));if(s==="closed"&&Date.now()<c+86400000)results(id);else $("results").classList.add("hidden")}
 async function vote(pid){let r=await sb.rpc("submit_vote",{p_match_id:selected.id,p_player_id:pid,p_device_hash:tok()});if(r.error)return alert(r.error.message);if(r.data?.success){localStorage.setItem("voted_"+selected.id,"1");alert("Hvala! Glas je zabilježen.");loadPublic()}else alert(r.data?.message||"Greška")}
-async function results(id){let r=await sb.rpc("get_match_results",{p_match_id:id});if(r.error)return;let a=r.data||[],t=a.reduce((s,x)=>s+Number(x.vote_count||0),0);$("results").classList.remove("hidden");$("results").innerHTML="<h2>REZULTATI</h2>"+a.map(x=>{let v=Number(x.vote_count||0),p=t?Math.round(v*100/t):0;return`<div class="row"><div class="ri"><b>${e(x.player_name)}</b><div class="bar"><div class="fill" style="width:${p}%"></div></div></div><b>${v} (${p}%)</b></div>`}).join("")}
+async function results(id){
+  let r=await sb.rpc("get_match_results",{p_match_id:id});
+  if(r.error)return;
+  let a=r.data||[],t=a.reduce((s,x)=>s+Number(x.vote_count||0),0);
+  $("results").classList.remove("hidden");
+  $("winnerBox").classList.add("hidden");
+
+  if(a.length && t>0){
+    let max=Math.max(...a.map(x=>Number(x.vote_count||0)));
+    let winners=a.filter(x=>Number(x.vote_count||0)===max);
+    let title=winners.length===1?"IGRAČ UTAKMICE":"IZJEDNAČENI NA VRHU";
+    let names=winners.map(x=>e(x.player_name)).join(" / ");
+    $("winnerBox").innerHTML='<div class="winner-title">'+title+'</div><div class="winner-name">'+names+'</div><div class="winner-votes">'+max+' glas'+(max===1?'':'ova')+'</div>';
+    $("winnerBox").classList.remove("hidden");
+  }
+
+  $("results").innerHTML="<h2>REZULTATI</h2>"+a.map(x=>{
+    let v=Number(x.vote_count||0),p=t?Math.round(v*100/t):0;
+    return`<div class="row"><div class="ri"><b>${e(x.player_name)}</b><div class="bar"><div class="fill" style="width:${p}%"></div></div></div><b>${v} (${p}%)</b></div>`
+  }).join("")+'<div class="center muted" style="margin-top:10px">Ukupno glasova: '+t+'</div>';
+}
 async function roster(){let r=await sb.from("players").select("*").order("shirt_number");$("roster").innerHTML=(r.data||[]).map(x=>`<div class="row">${x.photo_url?`<img src="${e(x.photo_url)}">`:`<div class="av"></div>`}<div class="ri"><b>#${e(x.shirt_number??"—")} ${e(x.name)}</b></div><button class="danger" data-d="${x.id}">OBRIŠI</button></div>`).join("")||'<div class="notice">Roster je prazan.</div>';document.querySelectorAll("[data-d]").forEach(b=>b.onclick=()=>delPlayer(b.dataset.d))}
 async function addPlayer(){let n=$("name").value.trim();if(!n)return alert("Unesi ime.");let r=await sb.from("players").insert({name:n,shirt_number:Number($("num").value)||null,photo_url:$("photo").value.trim()||null,active:true});if(r.error)return alert(r.error.message);$("name").value=$("num").value=$("photo").value="";roster();if(selected)manage(selected.id)}
 async function delPlayer(id){if(!confirm("Obrisati igrača?"))return;let r=await sb.from("players").delete().eq("id",id);if(r.error)return alert(r.error.message);roster()}
