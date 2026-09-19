@@ -101,7 +101,41 @@ header h1{letter-spacing:1.2px;font-size:30px;margin:12px 0 3px}
 </div><div class="card"><button id="logout" class="gray">ODJAVA</button></div></section></div>
 <script>
 const sb=supabase.createClient("https://srfniisyvjohlrngpnee.supabase.co","sb_publishable_jBq7SSHdgejzCAJv3jhreQ_CCUK6Lhs"),$=x=>document.getElementById(x);let selected=null,timer=null;const e=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));function tok(){let t=localStorage.getItem("zrinski_device_token");if(!t){t=crypto.randomUUID();localStorage.setItem("zrinski_device_token",t)}return t}function ft(ms){let s=Math.max(0,Math.floor(ms/1000)),h=Math.floor(s/3600);s%=3600;let m=Math.floor(s/60);s%=60;return[h,m,s].map(x=>String(x).padStart(2,"0")).join(":")}function tick(target,label){clearInterval(timer);let f=()=>{let d=target-Date.now();$("tl").textContent=label;if(d<=0){clearInterval(timer);loadPublic()}else $("tm").textContent=ft(d)};f();timer=setInterval(f,1000)}
-async function findMatch(){let q=new URLSearchParams(location.search).get("match");if(q)return q;let r=await sb.from("matches").select("*").eq("status","published").order("match_date",{ascending:false});if(!r.data?.length)return null;let n=Date.now(),a=r.data.find(x=>n>=new Date(x.voting_opens_at)&&n<new Date(x.voting_closes_at));if(a)return a.id;return r.data.filter(x=>new Date(x.voting_opens_at)>n).sort((a,b)=>new Date(a.voting_opens_at)-new Date(b.voting_opens_at))[0]?.id||null}
+async function findMatch(){
+  let q=new URLSearchParams(location.search).get("match");
+  if(q)return q;
+
+  let r=await sb.from("matches").select("*").eq("status","published").order("match_date",{ascending:false});
+  if(!r.data?.length)return null;
+
+  let n=Date.now();
+
+  // 1. Trenutno otvorena utakmica
+  let active=r.data.find(x=>{
+    let o=new Date(x.voting_opens_at).getTime();
+    let c=new Date(x.voting_closes_at).getTime();
+    return n>=o && n<c;
+  });
+  if(active)return active.id;
+
+  // 2. Ako je glasanje upravo završilo, zadrži tu utakmicu javno 24 sata
+  //    kako bi se mogli prikazati pobjednik i rezultati.
+  let recentClosed=r.data
+    .filter(x=>{
+      let c=new Date(x.voting_closes_at).getTime();
+      return n>=c && n<c+24*60*60*1000;
+    })
+    .sort((a,b)=>new Date(b.voting_closes_at)-new Date(a.voting_closes_at))[0];
+
+  if(recentClosed)return recentClosed.id;
+
+  // 3. Inače prikaži sljedeću nadolazeću utakmicu
+  let next=r.data
+    .filter(x=>new Date(x.voting_opens_at).getTime()>n)
+    .sort((a,b)=>new Date(a.voting_opens_at)-new Date(b.voting_opens_at))[0];
+
+  return next?.id||null;
+}
 async function loadPublic(){clearInterval(timer);let id=await findMatch();if(!id){$("mt").textContent="Nema aktivnog glasanja";$("vs").className="status closed";$("vs").textContent="NEMA GLASANJA";$("msg").textContent="Trenutno nema objavljene utakmice.";$("plist").innerHTML="";return}let r=await sb.from("matches").select("*").eq("id",id).maybeSingle();if(r.error||!r.data)return;selected=r.data;$("mt").textContent=r.data.home_team+" — "+r.data.away_team;$("mi").textContent=new Date(r.data.match_date+"T12:00:00").toLocaleDateString("hr-HR");let n=Date.now(),o=new Date(r.data.voting_opens_at).getTime(),c=new Date(r.data.voting_closes_at).getTime(),s=n<o?"wait":n<c?"open":"closed";$("vs").className="status "+s;$("vs").textContent=s==="open"?"GLASANJE OTVORENO":s==="wait"?"GLASANJE JOŠ NIJE OTVORENO":"GLASANJE ZATVORENO";if(s==="wait")tick(o,"OTVARA SE ZA");else if(s==="open")tick(c,"ZATVARA SE ZA");else{$("tl").textContent="GLASANJE ZAVRŠENO";$("tm").textContent="00:00:00"}let voted=localStorage.getItem("voted_"+id)==="1";$("msg").textContent=voted?"Vaš glas je već zabilježen.":s==="open"?"Odaberite igrača utakmice.":"Glasanje trenutno nije otvoreno.";let p=await sb.from("match_players").select("player_id,players(id,name,shirt_number,photo_url)").eq("match_id",id),rows=(p.data||[]).map(x=>x.players).filter(Boolean);$("plist").innerHTML=rows.length?rows.map(x=>`<div class="pc">${x.photo_url?`<img class="photo" src="${e(x.photo_url)}">`:`<div class="photo ph">⚽</div>`}<div class="pb"><div class="muted">BROJ ${e(x.shirt_number??"—")}</div><div class="pn">${e(x.name)}</div><button data-v="${x.id}" ${s!=="open"||voted?"disabled":""}>${voted?"GLAS ZABILJEŽEN":"GLASAJ"}</button></div></div>`).join(""):'<div class="notice">Igrači još nisu odabrani.</div>';document.querySelectorAll("[data-v]").forEach(b=>b.onclick=()=>vote(b.dataset.v));if(s==="closed"&&Date.now()<c+86400000)results(id);else $("results").classList.add("hidden")}
 async function vote(pid){let r=await sb.rpc("submit_vote",{p_match_id:selected.id,p_player_id:pid,p_device_hash:tok()});if(r.error)return alert(r.error.message);if(r.data?.success){localStorage.setItem("voted_"+selected.id,"1");alert("Hvala! Glas je zabilježen.");loadPublic()}else alert(r.data?.message||"Greška")}
 async function results(id){
