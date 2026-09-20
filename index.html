@@ -85,27 +85,7 @@ header h1{letter-spacing:1.2px;font-size:30px;margin:12px 0 3px}
 }
 
 </style></head><body><div class="wrap"><header><img src="logo.png" class="logo"><h1>IGRAČ UTAKMICE</h1><div class="muted">NK Zrinski Nova Bukovica</div><div class="nav"><button id="pubB" class="active">GLASANJE</button><button id="admB">ADMIN</button></div></header>
-<section id="pub"><div class="card"><div id="mt" class="title">Učitavanje...</div><div id="mi" class="center muted"></div><div id="vs" class="status wait">UČITAVANJE</div><div id="tl" class="center muted"></div><div id="tm" class="timer">--:--:--</div><div id="msg" class="notice"></div>
-<div id="voterAuth" class="card" style="margin-top:12px">
-  <h3 style="margin-top:0">Prijava za glasanje</h3>
-  <div class="notice">
-    <b>Privatnost glasanja</b><br>
-    E-mail se koristi samo za prijavu i sprječavanje višestrukog glasanja.
-    E-mail se ne sprema uz vaš glas i na stranici nije vidljivo za koga ste glasali.
-    Administrator vidi samo zbirne rezultate glasanja po igračima.
-  </div>
-  <div id="voterLoggedOut">
-    <label>E-mail</label>
-    <input id="voterEmail" type="email" placeholder="vas@email.com" autocomplete="email">
-    <button id="voterLoginBtn" class="blue" style="width:100%">POŠALJI LINK ZA PRIJAVU</button>
-    <div id="voterLoginMsg" class="muted" style="margin-top:8px"></div>
-  </div>
-  <div id="voterLoggedIn" class="hidden">
-    <div class="notice">Prijavljeni ste za glasanje.</div>
-    <button id="voterLogoutBtn" class="gray" style="width:100%">ODJAVI SE</button>
-  </div>
-</div>
-<div id="plist" class="players"></div><div id="winnerBox" class="hidden"></div><div id="results" class="hidden"></div></div></section>
+<section id="pub"><div class="card"><div id="mt" class="title">Učitavanje...</div><div id="mi" class="center muted"></div><div id="vs" class="status wait">UČITAVANJE</div><div id="tl" class="center muted"></div><div id="tm" class="timer">--:--:--</div><div id="msg" class="notice"></div><div id="plist" class="players"></div><div id="winnerBox" class="hidden"></div><div id="results" class="hidden"></div></div></section>
 <section id="login" class="card hidden"><h2>Admin prijava</h2><label>Email</label><input id="email" type="email"><label>Lozinka</label><input id="pass" type="password"><button id="loginB">PRIJAVI SE</button><div id="loginM"></div></section>
 <section id="admin" class="hidden"><div class="card"><h2>Nova utakmica</h2><div class="grid"><div><label>Domaći</label><input id="home" value="NK Zrinski"></div><div><label>Gosti</label><input id="away"></div></div><label>Datum</label><input id="date" type="date"><div class="grid"><div><label>Otvaranje</label><input id="op" type="datetime-local"></div><div><label>Zatvaranje</label><input id="cl" type="datetime-local"></div></div><label>Status</label><select id="st"><option value="published">Objavljeno</option><option value="draft">Nacrt</option></select><button id="saveB">SPREMI UTAKMICU</button><div id="am"></div></div>
 <div class="card"><h2>Stalni roster</h2><div class="grid"><div><label>Ime i prezime</label><input id="name"></div><div><label>Broj</label><input id="num" type="number"></div></div><label>URL fotografije (opcionalno)</label><input id="photo"><button id="addB">DODAJ U ROSTER</button><div id="roster"></div></div>
@@ -121,57 +101,6 @@ header h1{letter-spacing:1.2px;font-size:30px;margin:12px 0 3px}
 </div><div class="card"><button id="logout" class="gray">ODJAVA</button></div></section></div>
 <script>
 const sb=supabase.createClient("https://srfniisyvjohlrngpnee.supabase.co","sb_publishable_jBq7SSHdgejzCAJv3jhreQ_CCUK6Lhs"),$=x=>document.getElementById(x);let selected=null,timer=null;const e=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));function tok(){let t=localStorage.getItem("zrinski_device_token");if(!t){t=crypto.randomUUID();localStorage.setItem("zrinski_device_token",t)}return t}function ft(ms){let s=Math.max(0,Math.floor(ms/1000)),h=Math.floor(s/3600);s%=3600;let m=Math.floor(s/60);s%=60;return[h,m,s].map(x=>String(x).padStart(2,"0")).join(":")}function tick(target,label){clearInterval(timer);let f=()=>{let d=target-Date.now();$("tl").textContent=label;if(d<=0){clearInterval(timer);loadPublic()}else $("tm").textContent=ft(d)};f();timer=setInterval(f,1000)}
-async function voterSession(){
-  let s=await sb.auth.getSession();
-  return s.data.session||null;
-}
-
-async function refreshVoterAuth(){
-  let session=await voterSession();
-  if(session){
-    $("voterLoggedOut").classList.add("hidden");
-    $("voterLoggedIn").classList.remove("hidden");
-  }else{
-    $("voterLoggedOut").classList.remove("hidden");
-    $("voterLoggedIn").classList.add("hidden");
-  }
-  return session;
-}
-
-async function sendVoterMagicLink(){
-  let email=$("voterEmail").value.trim();
-  if(!email){
-    $("voterLoginMsg").textContent="Unesite e-mail adresu.";
-    return;
-  }
-  $("voterLoginBtn").disabled=true;
-  $("voterLoginMsg").textContent="Šaljem link za prijavu...";
-  let redirect=location.origin+location.pathname+location.search;
-  let r=await sb.auth.signInWithOtp({
-    email,
-    options:{emailRedirectTo:redirect,shouldCreateUser:true}
-  });
-  $("voterLoginBtn").disabled=false;
-  if(r.error){
-    $("voterLoginMsg").textContent="Greška: "+r.error.message;
-    return;
-  }
-  $("voterLoginMsg").textContent="Link za prijavu je poslan. Otvorite e-mail i kliknite link, zatim ćete se vratiti na glasanje.";
-}
-
-async function voterLogout(){
-  await sb.auth.signOut();
-  await refreshVoterAuth();
-  loadPublic();
-}
-
-async function isCurrentUserAdmin(){
-  let s=await sb.auth.getSession();
-  if(!s.data.session)return false;
-  let r=await sb.rpc("is_admin");
-  return !r.error && r.data===true;
-}
-
 async function findMatch(){
   let q=new URLSearchParams(location.search).get("match");
   if(q)return q;
@@ -242,7 +171,6 @@ async function loadPublic(){
     $("vs").textContent="SLJEDEĆA UTAKMICA";
     $("msg").textContent="Glasanje još nije otvoreno.";
     $("plist").innerHTML="";
-    $("voterAuth").classList.add("hidden");
     $("winnerBox").classList.add("hidden");
     $("results").classList.add("hidden");
     tick(o,"DO OTVARANJA GLASANJA");
@@ -254,7 +182,6 @@ async function loadPublic(){
     $("mi").textContent=new Date(r.data.match_date+"T12:00:00").toLocaleDateString("hr-HR");
     $("vs").className="status open";
     $("vs").textContent="GLASANJE OTVORENO";
-    $("voterAuth").classList.remove("hidden");
     tick(c,"GLASANJE SE ZATVARA ZA");
 
     let voted=localStorage.getItem("voted_"+id)==="1";
@@ -267,7 +194,7 @@ async function loadPublic(){
     let rows=(p.data||[]).map(x=>x.players).filter(Boolean);
 
     $("plist").innerHTML=rows.length
-      ? rows.map(x=>`<div class="pc">${x.photo_url?`<img class="photo" src="${e(x.photo_url)}">`:`<div class="photo ph">⚽</div>`}<div class="pb"><div class="muted">BROJ ${e(x.shirt_number??"—")}</div><div class="pn">${e(x.name)}</div><button data-v="${x.id}" ${session?"":"disabled"}>${session?"GLASAJ":"PRIJAVA POTREBNA"}</button></div></div>`).join("")
+      ? rows.map(x=>`<div class="pc">${x.photo_url?`<img class="photo" src="${e(x.photo_url)}">`:`<div class="photo ph">⚽</div>`}<div class="pb"><div class="muted">BROJ ${e(x.shirt_number??"—")}</div><div class="pn">${e(x.name)}</div><button data-v="${x.id}" ${voted?"disabled":""}>${voted?"GLAS ZABILJEŽEN":"GLASAJ"}</button></div></div>`).join("")
       : '<div class="notice">Igrači još nisu odabrani.</div>';
 
     document.querySelectorAll("[data-v]").forEach(b=>b.onclick=()=>vote(b.dataset.v));
@@ -284,23 +211,9 @@ async function loadPublic(){
   $("tm").textContent="";
   $("msg").classList.add("hidden");
   $("plist").innerHTML="";
-  $("voterAuth").classList.add("hidden");
   await results(id);
 }
-async function vote(pid){
-  let session=await voterSession();
-  if(!session){
-    $("voterAuth").scrollIntoView({behavior:"smooth",block:"center"});
-    $("voterLoginMsg").textContent="Prvo se prijavite e-mailom kako biste mogli glasati.";
-    return;
-  }
-  let r=await sb.rpc("submit_vote_auth",{p_match_id:selected.id,p_player_id:pid});
-  if(r.error){alert("Greška: "+r.error.message);return;}
-  if(r.data?.success){
-    alert("Hvala! Glas je zabilježen.");
-    loadPublic();
-  }else alert(r.data?.message||"Glas nije zaprimljen.");
-}
+async function vote(pid){let r=await sb.rpc("submit_vote",{p_match_id:selected.id,p_player_id:pid,p_device_hash:tok()});if(r.error)return alert(r.error.message);if(r.data?.success){localStorage.setItem("voted_"+selected.id,"1");alert("Hvala! Glas je zabilježen.");loadPublic()}else alert(r.data?.message||"Greška")}
 async function results(id){
   let r=await sb.rpc("get_match_results",{p_match_id:id});
   if(r.error)return;
@@ -357,34 +270,7 @@ async function adminLiveResults(id){
 
 async function manage(id){let m=await sb.from("matches").select("*").eq("id",id).single();if(m.error)return alert(m.error.message);selected=m.data;$("manage").classList.remove("hidden");$("sm").textContent=m.data.home_team+" — "+m.data.away_team+" | "+m.data.match_date;let [p,q]=await Promise.all([sb.from("players").select("*").eq("active",true).order("shirt_number"),sb.from("match_players").select("player_id").eq("match_id",id)]),on=new Set((q.data||[]).map(x=>x.player_id));$("mr").innerHTML=(p.data||[]).map(x=>`<div class="row ${on.has(x.id)?"sel":""}"><div class="ri"><b>#${e(x.shirt_number??"—")} ${e(x.name)}</b><div class="muted">${on.has(x.id)?"✓ U GLASANJU":"NIJE ODABRAN"}</div></div><button class="${on.has(x.id)?"gray":"blue"}" data-t="${x.id}">${on.has(x.id)?"ISKLJUČI":"UKLJUČI"}</button></div>`).join("");document.querySelectorAll("[data-t]").forEach(b=>b.onclick=()=>toggle(id,b.dataset.t,on.has(b.dataset.t)));await adminLiveResults(id)}
 async function toggle(mid,pid,on){let r=on?await sb.from("match_players").delete().eq("match_id",mid).eq("player_id",pid):await sb.from("match_players").insert({match_id:mid,player_id:pid});if(r.error)return alert(r.error.message);manage(mid)}
-async function adminMode(){
-  $("pub").classList.add("hidden");
-  $("pubB").classList.remove("active");
-  $("admB").classList.add("active");
-  let adminOk=await isCurrentUserAdmin();
-  if(adminOk){
-    $("login").classList.add("hidden");
-    $("admin").classList.remove("hidden");
-    matches();roster();
-  }else{
-    $("login").classList.remove("hidden");
-    $("admin").classList.add("hidden");
-    $("loginM").textContent="";
-  }
-}
+async function adminMode(){$("pub").classList.add("hidden");$("pubB").classList.remove("active");$("admB").classList.add("active");let s=await sb.auth.getSession();if(s.data.session){$("login").classList.add("hidden");$("admin").classList.remove("hidden");matches();roster()}else{$("login").classList.remove("hidden");$("admin").classList.add("hidden")}}
 function publicMode(){$("pub").classList.remove("hidden");$("login").classList.add("hidden");$("admin").classList.add("hidden");$("pubB").classList.add("active");$("admB").classList.remove("active");loadPublic()}
-$("pubB").onclick=publicMode;$("admB").onclick=adminMode;$("loginB").onclick=async()=>{
-  let r=await sb.auth.signInWithPassword({email:$("email").value.trim(),password:$("pass").value});
-  if(r.error){$("loginM").textContent=r.error.message;return;}
-  let ok=await isCurrentUserAdmin();
-  if(!ok){$("loginM").textContent="Ovaj račun nema administratorska prava.";return;}
-  adminMode();
-};$("saveB").onclick=save;
-$("addB").onclick=addPlayer;
-$("refreshResults").onclick=()=>{if(selected)adminLiveResults(selected.id)};
-$("voterLoginBtn").onclick=sendVoterMagicLink;
-$("voterLogoutBtn").onclick=voterLogout;
-$("logout").onclick=async()=>{await sb.auth.signOut();publicMode()};
-sb.auth.onAuthStateChange(()=>{refreshVoterAuth();});
-publicMode();
+$("pubB").onclick=publicMode;$("admB").onclick=adminMode;$("loginB").onclick=async()=>{let r=await sb.auth.signInWithPassword({email:$("email").value.trim(),password:$("pass").value});if(r.error)return $("loginM").textContent=r.error.message;adminMode()};$("saveB").onclick=save;$("addB").onclick=addPlayer;$("refreshResults").onclick=()=>{if(selected)adminLiveResults(selected.id)};$("logout").onclick=async()=>{await sb.auth.signOut();publicMode()};publicMode();
 </script></body></html>
